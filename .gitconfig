@@ -1,9 +1,7 @@
 [user]
-  name = Wenlong Xiong
-  email = wenlongx@gmail.com
-
-[github]
-  user = wenlongx
+    name = Wenlong Xiong
+    email = wenlongx@gmail.com
+    username = wenlongx
 
 [core]
   excludesfile = ~/.gitignore_global
