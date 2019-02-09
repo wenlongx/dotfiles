@@ -94,6 +94,12 @@ set wrap "Wrap lines
 " Set line numbers
 set number
 
+" Set smart indent / line wrap for long lines
+set breakindent
+set breakindentopt=shift:2
+" don't break words when wrapping
+set linebreak
+
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
