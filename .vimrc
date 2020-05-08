@@ -37,21 +37,32 @@ set tm=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable True Color in colorschemes
+set background=dark
+
 " Enable syntax highlighting
 syntax enable
 
-" Enable True Color in colorschemes
-set background=dark
-set termguicolors
-
 " Set custom color scheme
-colorscheme iceberg
+colorscheme nord
+let g:nord_cursor_line_number_background = 1
+let g:nord_bold_vertical_split_line = 1
+
+set termguicolors
 
 " Set lightline theme
 set laststatus=2
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'nord',
       \ }
+
+" Tmuxline
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '>',
+    \ 'right' : '',
+    \ 'right_alt' : '<',
+    \ 'space' : ' '}
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
