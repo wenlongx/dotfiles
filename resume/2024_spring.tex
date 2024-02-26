@@ -55,7 +55,7 @@
   }
 }
 
-\newcommand{\resumeItemOne}[1]{
+\newcommand{\resumeItemBullet}[1]{
   \item[$\circ$]\small{{#1 \vspace{-2pt}}
   }
 }
@@ -79,6 +79,22 @@
   \vspace{-2pt}\item[$ $]
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \textbf{#1}, \small #2 & \small #3 \\
+    \end{tabular*}
+  \vspace{-7pt}
+}
+
+\newcommand{\resumeSubheadingActivitySection}[3]{
+  \vspace{0pt}\item[$ $]
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small #1} & \small #2 \\
+    \end{tabular*}
+  \vspace{-7pt}
+}
+
+\newcommand{\resumeLink}[3]{
+  \vspace{0pt}\item[$ $]
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{\small #1}, \small #2 & \small #3 \\
     \end{tabular*}
   \vspace{-7pt}
 }
@@ -111,12 +127,96 @@
 %----------HEADING-----------------
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{{\LARGE Wenlong Xiong}} 
-  & \small{wenlongx@ucla.edu} \\
+  & \small{wenlongx@gmail.com} \\
   & \small{+1 (650) 862-9170} \\
   & \small{github.com/wenlongx} \\
 \vspace{-10pt}
 \end{tabular*}
 \vspace{-20pt}
+
+%--------PROGRAMMING SKILLS------------
+\section{Skills}
+\resumeSubHeadingListStart
+	\resumeSubItem{Languages}{Golang, Python, Java, Bash}
+	\resumeSubItem{Technologies}{Kubernetes, Kafka, gRPC, Envoy, Terraform, SaltStack, Airflow, Spark, Hadoop, Presto/Trino}
+\resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------------
+\section{Experience}
+\resumeSubHeadingListStart
+    \resumeSubheading
+    {Robinhood}{Senior Software Engineer}{ }
+    \resumeSubheadingActivitySection
+      {Service Discovery and Traffic}{Feb 2023 - Present}
+
+    \resumeItemListStart
+      \resumeItemBullet{Implemented an egress proxy service for egress filtering, and leading migration effort to secure\\
+      outbound traffic across 100+ services and multiple protocols (https, ssh, ftp, websocket).}
+      \resumeItemBullet{Enhanced existing kubernetes controllers to generate Calico network policies for egress controls.}
+      \resumeItemBullet{Maintained and supported gRPC Golang / Python libraries, gRPCLB / XDS lookaside loadbalancers.}
+      \resumeItemBullet{Designing and implementing a websocket gateway to stream backend events to Web clients.}
+    \resumeItemListEnd
+      
+    \resumeSubheadingActivitySection
+      {Kafka and Streaming Platform}{Jun 2021 - Feb 2023}
+
+    \resumeItemListStart
+      \resumeItemBullet{Helped design and implement RH's Golang Kafka library, with features like deadletter queues,\\
+      observability by default, and multicluster produce and consume.}
+      \resumeItemBullet{Drove RH's multicluster kafka initiative and migrated all critical trading services to multicluster\\
+      produce / consume, removing a kafka cluster outage as a possible single point of failure for trading.}
+      \resumeItemBullet{Designed and implemented a Kafka consumer proxy sidecar in Java, which increased consumer stability\\
+      and reduced rebalance delays on the trading path, while matching existing throughput / latency.}
+      \resumeItemBullet{Directed Build vs Buy decision after evaluating vendors (Confluent Cloud, MSK) \& open source\\\
+      (Strimzi, etc). Helped rightsize existing Kafka infrastructure, saving 2.5MM/Y. Defined migration\\
+      path to running Kafka on kubernetes, which is serving X\% production traffic.}
+      \resumeItemBullet{Worked with a small team to authn/z all kafka traffic, migrating $\sim$100 services across a dozens of clusters.}
+      \resumeItemBullet{Helped implement a CDC system using Debezium \& Flink for event-driven applications.}
+      % \resumeItemBullet{Defined cluster upgrade process \TODO: cluster upgrade scripts}
+    \resumeItemListEnd
+
+    \resumeSubheadingActivitySection
+      {Data Infrastructure}{Feb 2020 - Jun 2021}
+
+    \resumeItemListStart
+        \resumeItemBullet{
+          Oversaw RH's Spark/Hadoop multicluster (1 to 15) migration, and built initial version of resource\\
+          based job routing system. This enabled RH's first data-intensive product (IPO Access), and\\
+          met compliance requirements for IPO (financial data access controls).}
+        \resumeItemBullet{Developed a dependency ordering framework for managing the lifecycle of Kubernetes sidecars, now\\
+        used in all RH production kubernetes services (100s of namespaces, dozens of clusters).}
+        \resumeItemBullet{Bootstrapped Robinhood's Data Engineering team \& interviewed first $\sim$10 initial hires.}
+        \resumeItemBullet{Drove Airflow 1.x to 1.10 upgrade and kubernetes migration for hundreds of DAGs, dozens of services.}
+        \resumeItemBullet{Derisked and started kubernetes migration for production Presto/Trino clusters.}
+    \resumeItemListEnd
+    
+    \resumeSubheading
+    {Microsoft (Azure Stack)}{Software Engineering Intern}{Jun 2019 - Sep 2019}
+    \resumeItemListStart
+        \resumeItemBullet{Compute infrastructure (VM provisioning) team for hybrid cloud. Enabled IMDS
+        \\(Instance Metadata Service) in Azure Stack VMs, and extended existing Azure Stack .NET\\
+        services to support this newly introduced component.}
+    \resumeItemListEnd
+    
+    \resumeSubheading
+    {Bloomberg}{Software Engineering Intern}{Jun 2018 - Sep 2018}
+    \resumeItemListStart
+        \resumeItemBullet{Wrote an event ingestion service in Python that performed real time filtering and redaction on\\messages sent using Instant Bloomberg Chat.}
+        % \resumeItemBullet{Advocated for adoption of Python 3 features in new services (dataclasses, static type checking, f-strings, etc).}
+    \resumeItemListEnd
+    
+\resumeSubHeadingListEnd
+
+%--------LINKS AND CONFERENCES------------
+\section{Links \& Talks}
+\resumeSubHeadingListStart
+  \resumeLink
+  {Current Summit}{\href{https://www.confluent.io/events/current/2023/robinhoods-kafkaproxy-decoupling-kafka-consumer-logic-from-application/}{Kafkaproxy: Decoupling Kafka Consumer Logic from Application Business Logic}}{2023}
+  \resumeLink
+  {Current Summit}{\href{https://www.confluent.io/events/current-2022/dead-letter-queues-for-kafka-consumers-in-robinhood/}{Dead Letter Queues for Kafka Consumers}}{2022}
+  % https://www.confluent.io/events/current/2023/robinhoods-kafkaproxy-decoupling-kafka-consumer-logic-from-application/
+  % https://www.confluent.io/events/current-2022/dead-letter-queues-for-kafka-consumers-in-robinhood/
+\resumeSubHeadingListEnd
 
 %-----------EDUCATION-----------------
 \section{Education}
@@ -126,93 +226,40 @@
       {M.S. Computer Science;  GPA: 3.93}{Sep 2018 - Dec 2019}
       {B.S. Computer Science;  GPA: 3.76 (\textit{Cum Laude})}{Sep 2014 - Jun 2018}
     
-    \resumeSubItem{Selected Coursework}{Big Data Systems \textit{(IP)}, Computational Genetics, Computer Networking,\\Computer Vision, Databases, Data Mining, Machine Learning Algorithms, Natural Language Processing,\\Convolutional Neural Networks \& Deep Learning, Neural Signal Processing, Reinforcement Learning}
+    % \resumeSubItem{Selected Coursework}{Big Data Systems, Computational Genetics, Computer Networking,\\Computer Vision, Data Mining, Machine Learning Algorithms, Natural Language Processing,\\Convolutional Neural Networks \& Deep Learning, Neural Signal Processing, Reinforcement Learning}
 
 \resumeSubHeadingListEnd
 
-%--------PROGRAMMING SKILLS------------
-\section{Skills}
-\resumeSubHeadingListStart
-	\resumeSubItem{Programming Languages}{Python, C++, C, Bash, C\#, Javascript, Lisp, R}
-	\resumeSubItem{Technologies}{Tensorflow, Pytorch, Theano, Docker, Kafka, Redis, Aurora, Jenkins, SaltStack, Mesos}
-\resumeSubHeadingListEnd
+% %-----------PROJECTS-----------------
+% \section{Activities}
+% \resumeSubHeadingListStart
+%     \resumeSubheadingActivity
+%     {Teaching Assistant at UCLA Engineering}{ENGR112 (Fall 2018, Spring 2019), ENGR111 (Winter 2019)}{Sep 2018 - Jun 2019}
+%     \resumeItemListStart
+%         \resumeItemBullet{Assisted in preparing course materials, grading and assigning homeworks, proctoring exams,\\hosting discussion sections and office hours, and teaching review sessions.}
+%     \resumeItemListEnd
 
-%-----------EXPERIENCE-----------------
-\section{Experience}
-\resumeSubHeadingListStart
-    \resumeSubheading
-    {Microsoft}{Software Engineering Intern}{Jun 2019 - Sep 2019}
-    \resumeItemListStart
-        \resumeItemOne{Worked on the compute infrastructure (VM provisioning) team for Azure Stack hybrid cloud.}
-        \resumeItemOne{Modified the Azure Instance Metadata Service to enable it in Azure Stack, and extended\\existing Azure Stack .NET services to support this newly introduced component.}
-    \resumeItemListEnd
+%     \resumeSubheadingActivity
+%     {UCLA IEEE Student Branch}{External Vice President (2016-2018), Treasurer (2015)}{Jul 2015 - May 2018}
+%     \resumeItemListStart
+%         \resumeItemBullet{Communicated with UCLA ECE department and engineering orgs to host schoolwide events,\\ maintain corporate connections, secure funding, and shape the organization's direction.}
+%         \resumeItemBullet{Managed organization's finances and approved over \$25k of purchases.}
+%     \resumeItemListEnd
     
-    \resumeSubheading
-    {Bloomberg}{Software Engineering Intern}{Jun 2018 - Sep 2018}
-    \resumeItemListStart
-        \resumeItemOne{Wrote an event ingestion service using Apache Kafka for Instant Bloomberg Chat that checks\\permissions and filters every message sent from Bloomberg terminals in near real time.}
-        \resumeItemOne{Created a Python utility library that multiple services in the IB Chat team use to read from\\and write to Kafka topics.}
-        % \resumeItemOne{Advocated for adoption of Python 3 features in new services (dataclasses, static type checking, f-strings, etc).}
-    \resumeItemListEnd
+%     \resumeSubheadingActivity
+%     {Startup Fair LA (previously Bruin Startup Fair)}{Event Organizer (2016), Sponsorship Team Lead (2015)}{Aug 2015 - Dec 2016}
+%     \resumeItemListStart
+%         \resumeItemBullet{Organized 2 bi-annual startup-focused career fairs, each with over 35 participating companies\\and 3 corporate recruiting information sessions.}
+%     \resumeItemListEnd
     
-    \resumeSubheading
-    {Geschwind Lab}{Undergraduate Researcher}{Apr 2017 - Dec 2017}
-    \resumeItemListStart
-        \resumeItemOne{Implemented autoencoder neural network in Python using Theano and Lasagne to perform\\classification and denoising on gene expression data.}
-        \resumeItemOne{Investigated novel network architecture that used adversarial networks together with\\autoencoders to reduce batch error resulting from different gene sequencing technologies.}
-    \resumeItemListEnd
+%     % \resumeSubheading
+%     \resumeSubheadingActivity
+%     {UCLA Upsilon Pi Epsilon}{Design Chair}{Nov 2015 - Jun 2016}
+%     \resumeItemListStart
+%         \resumeItemBullet{Created the official corporate sponsorship information packet used by the UCLA CS department.}
+%     \resumeItemListEnd
     
-    \resumeSubheading
-    {Hulu}{Software Development Intern}{Jun 2017 - Sep 2017}
-    \resumeItemListStart
-        \resumeItemOne{Created internal Python testing tool to generate headless web clients using Aurora, Mesos,\\ and Docker, that would perform stress and soak tests on the Hulu Live TV service.}
-    \resumeItemListEnd
-    
-    \resumeSubheading
-    {Texas Instruments}{Product Marketing Intern}{Jun 2016 - Sep 2016}
-    \resumeItemListStart
-        \resumeItemOne{Wrote Energia library in C/C++ to provide user-friendly APIs for newly released 4G LTE\\Evaluation Kit (EVK4) from Telit Communications.}
-    \resumeItemListEnd
-    
-    \resumeSubheading
-    {VCLA Research Center}{Undergraduate Researcher}{Jul 2015 - Sep 2015}
-    \resumeItemListStart
-        \resumeItemOne{Created Python scripts to generate 3D Maya models for robot arm trajectory error checking.}
-        \resumeItemOne{ICRA 2016 Paper: "Robot Learning with a Spatial, Temporal, and Causal And-Or Graph"}
-    \resumeItemListEnd
-
-\resumeSubHeadingListEnd
-
-%-----------PROJECTS-----------------
-\section{Activities}
-\resumeSubHeadingListStart
-    \resumeSubheadingActivity
-    {Teaching Assistant at UCLA Engineering}{ENGR112 (Fall 2018, Spring 2019), ENGR111 (Winter 2019)}{Sep 2018 - Jun 2019}
-    \resumeItemListStart
-        \resumeItemOne{Assisted in preparing course materials, grading and assigning homeworks, proctoring exams,\\hosting discussion sections and office hours, and teaching review sessions.}
-    \resumeItemListEnd
-
-    \resumeSubheadingActivity
-    {UCLA IEEE Student Branch}{External Vice President (2016-2018), Treasurer (2015)}{Jul 2015 - May 2018}
-    \resumeItemListStart
-        \resumeItemOne{Communicated with UCLA ECE department and engineering orgs to host schoolwide events,\\ maintain corporate connections, secure funding, and shape the organization's direction.}
-        \resumeItemOne{Managed organization's finances and approved over \$25k of purchases.}
-    \resumeItemListEnd
-    
-    \resumeSubheadingActivity
-    {Startup Fair LA (previously Bruin Startup Fair)}{Event Organizer (2016), Sponsorship Team Lead (2015)}{Aug 2015 - Dec 2016}
-    \resumeItemListStart
-        \resumeItemOne{Organized 2 bi-annual startup-focused career fairs, each with over 35 participating companies\\and 3 corporate recruiting information sessions.}
-    \resumeItemListEnd
-    
-    % \resumeSubheading
-    \resumeSubheadingActivity
-    {UCLA Upsilon Pi Epsilon}{Design Chair}{Nov 2015 - Jun 2016}
-    \resumeItemListStart
-        \resumeItemOne{Created the official corporate sponsorship information packet used by the UCLA CS department.}
-    \resumeItemListEnd
-    
-\resumeSubHeadingListEnd
+% \resumeSubHeadingListEnd
 
 % %-----------Awards-----------------
 % \section{Publications}
